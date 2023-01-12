@@ -36,6 +36,10 @@ namespace AzureStorageAPI.BL
                 returnmessage = "message Send successfully";
 
             }
+            else
+            {
+                throw new InvalidOperationException("queueName Not Found");
+            }
             return returnmessage;
         }
         public async Task<string> UpdateMessageAsync(QueueModel queue)
@@ -55,6 +59,10 @@ namespace AzureStorageAPI.BL
                     );
 
             }
+            else
+            {
+                throw new InvalidOperationException("queueName Not Found");
+            }
             return returnmessage;
         }
         public async Task<string> PeekMessageAsync(string queueName)
@@ -66,8 +74,15 @@ namespace AzureStorageAPI.BL
                 // Peek at the next message
                 PeekedMessage[] peekedMessage = queueClient.PeekMessages();
 
-                returnmessage = peekedMessage[0].Body.ToString();
+                if (peekedMessage==null)
+                    throw new InvalidOperationException("No Message Found");
+                else
+                    returnmessage = peekedMessage[0].Body.ToString();
 
+            }
+            else
+            {
+                throw new InvalidOperationException("queueName Not Found");
             }
             return returnmessage;
         }
@@ -80,12 +95,17 @@ namespace AzureStorageAPI.BL
             {
                 // Get the next message
                 QueueMessage[] retrievedMessage = queueClient.ReceiveMessages();
-
-                // Delete the message
-                await queueClient.DeleteMessageAsync(retrievedMessage[0].MessageId, retrievedMessage[0].PopReceipt);
+                if (retrievedMessage == null)
+                    throw new InvalidOperationException("No Message Found");
+                else
+                    await queueClient.DeleteMessageAsync(retrievedMessage[0].MessageId, retrievedMessage[0].PopReceipt);
 
                 returnmessage = "message deleted successfully";
 
+            }
+            else
+            {
+                throw new InvalidOperationException("queueName Not Found");
             }
             return returnmessage;
         }
