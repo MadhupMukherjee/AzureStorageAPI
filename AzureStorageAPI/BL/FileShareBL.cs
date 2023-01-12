@@ -13,6 +13,7 @@ namespace AzureStorageAPI.BL
         {
             _configuration = configuration;
         }
+
         public async Task<string> FileShareAsync(string directoryName, string filename, string shareName, Stream fileContent)
         {
 

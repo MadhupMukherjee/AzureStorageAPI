@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BL\CustomError.cs" />
     <Compile Remove="Controllers\AzureTableController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="Model\BlobModel.cs" />
