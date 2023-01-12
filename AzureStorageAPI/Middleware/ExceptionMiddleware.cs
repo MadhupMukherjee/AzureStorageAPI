@@ -47,7 +47,13 @@ namespace AzureStorageAPI.Middleware
                 error.message = fileNotFoundException.Message;
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(error));
             }
-
+            else if (exception is InvalidOperationException invalidOperationException)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                error.StatusCode = context.Response.StatusCode;
+                error.message = invalidOperationException.Message;
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(error));
+            }
             else
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

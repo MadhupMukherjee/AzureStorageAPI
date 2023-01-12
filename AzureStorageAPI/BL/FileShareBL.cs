@@ -38,6 +38,14 @@ namespace AzureStorageAPI.BL
                             fileContent);
                     }
                 }
+                else
+                {
+                    throw new InvalidOperationException("No directory Found");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("No share Client Found");
             }
 
             return "File Shared SuccessFully";
@@ -115,10 +123,21 @@ namespace AzureStorageAPI.BL
 
                         //}
                     }
+                    else
+                    {
+                        throw new InvalidOperationException("No File Found");
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No directory Found");
                 }
 
             }
-
+            else
+            {
+                throw new InvalidOperationException("No Share Client Found");
+            }
             return msg;
         }
 

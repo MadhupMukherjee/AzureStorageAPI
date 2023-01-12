@@ -18,7 +18,7 @@ namespace AzureStorageAPI.BL
             var container = BlobExtensions.GetContainer(_configuration["StorageConnectionString"], containerName);
             if (!await container.ExistsAsync())
             {
-                return "Container Not Found";
+                throw new FileNotFoundException("Container Not Found");
             }
 
             var blobClient = container.GetBlobClient(filename);
@@ -30,7 +30,7 @@ namespace AzureStorageAPI.BL
             }
             else
             {
-                throw new FileNotFoundException();
+                throw new FileNotFoundException("File Not Found");
             }
         }
 
@@ -49,7 +49,15 @@ namespace AzureStorageAPI.BL
             {
                 blobs.Add(blobItem.Name);
             }
-            return blobs;
+
+            if (blobs.Count > 0)
+            {
+                return blobs;
+            }
+            else
+            {
+                throw new InvalidOperationException("No File Found");
+            }
         }
 
         public async Task<Stream> GetDocumentAsync(string containerName, string filename)
@@ -65,12 +73,12 @@ namespace AzureStorageAPI.BL
                 }
                 else
                 {
-                    throw new FileNotFoundException();
+                    throw new InvalidOperationException("No File Found");
                 }
             }
             else
             {
-                throw new FileNotFoundException();
+                throw new InvalidOperationException("No container Found");
             }
         }
 
