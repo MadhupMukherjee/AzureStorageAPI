@@ -51,53 +51,6 @@ namespace AzureStorageAPI.BL
             return "File Shared SuccessFully";
 
 
-
-            //// Instantiate a ShareClient which will be used to create and manipulate the file share
-            //ShareClient share = new ShareClient(_configuration["StorageConnectionString"], shareName);
-
-            //// Create the share if it doesn't already exist
-            //await share.CreateIfNotExistsAsync();
-
-            //// Ensure that the share exists
-            //if (await share.ExistsAsync())
-            //{ 
-
-            //    // Get a reference to the sample directory
-            //    ShareDirectoryClient directory = share.GetDirectoryClient(directoryName);
-
-            //    // Create the directory if it doesn't already exist
-            //    await directory.CreateIfNotExistsAsync();
-
-            //    // Ensure that the directory exists
-            //    if (await directory.ExistsAsync())
-            //    {
-            //        // Get a reference to a file object
-            //        ShareFileClient file = directory.GetFileClient(filename);
-
-            //        // Ensure that the file exists
-            //        if (await file.ExistsAsync())
-            //        {
-
-            //            // Download the file
-            //            ShareFileDownloadInfo download = await file.DownloadAsync();
-
-            //            // Save the data to a local file, overwrite if the file already exists
-            //            using (FileStream stream = File.OpenWrite(@"downloadedLog1.txt"))
-            //            {
-            //                await download.Content.CopyToAsync(stream);
-            //                await stream.FlushAsync();
-            //                stream.Close();
-
-            //                // Display where the file was saved
-            //                Console.WriteLine($"File downloaded: {stream.Name}");
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine($"CreateShareAsync failed");
-            //}
         }
 
         public async Task<string> DownloadFileAsync(string directoryName, string filename, string shareName)
