@@ -8,6 +8,7 @@ namespace AzureStorageAPI.BL
     public class AzureBlobBL : IAzureBlobService
     {
         private readonly IConfiguration _configuration;
+
         public AzureBlobBL(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -20,6 +21,7 @@ namespace AzureStorageAPI.BL
             {
                 throw new FileNotFoundException("Container Not Found");
             }
+
 
             var blobClient = container.GetBlobClient(filename);
 
