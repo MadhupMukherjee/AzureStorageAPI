@@ -103,7 +103,6 @@ namespace AzureStorageAPI.BL
         public async Task<string> DownloadFileAsync(string directoryName, string filename, string shareName)
         {
             string msg = string.Empty;
-            string localFilePath = @"E:\Project\AzureStorageAPI\AzureStorageAPI\Files"; ;
             ShareClient share = new ShareClient(_configuration["StorageConnectionString"], shareName);
             if (await share.ExistsAsync())
             {
@@ -113,6 +112,7 @@ namespace AzureStorageAPI.BL
                     ShareFileClient file = directory.GetFileClient(filename);
                     if (await file.ExistsAsync())
                     {
+                        
                         // Download the file
                         ShareFileDownloadInfo download = file.Download();
                         msg = "File Downloaded SuccessFully";
@@ -141,23 +141,44 @@ namespace AzureStorageAPI.BL
             return msg;
         }
 
+
+        public async Task<string> DeleteFileAsync(string directoryName, string filename, string shareName)
+        {
+            string msg = string.Empty;
+            ShareClient share = new ShareClient(_configuration["StorageConnectionString"], shareName);
+            if (await share.ExistsAsync())
+            {
+                ShareDirectoryClient directory = share.GetDirectoryClient(directoryName);
+                if (await directory.ExistsAsync())
+                {
+                    ShareFileClient file = directory.GetFileClient(filename);
+                    if (await file.ExistsAsync())
+                    {
+
+                      await file.DeleteAsync();
+                      return "File Deleted successfully";
+
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("No File Found");
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("No directory Found");
+                }
+
+            }
+            else
+            {
+                throw new InvalidOperationException("No Share Client Found");
+            }
+        }
         //public async Task<string> GetFileListsAsync(string directoryName)
         //{
-        //    string msg = string.Empty;
-        //    string localFilePath = @"E:\Project\AzureStorageAPI\AzureStorageAPI\Files"; ;
-        //    ShareFileItem shareFileItem = null;
         //    ShareClient share = new ShareClient(_configuration["StorageConnectionString"], shareName);
-        //    if (await share.ExistsAsync())
-        //    {
-        //        ShareDirectoryClient directory = share.GetDirectoryClient(directoryName);
-        //        if (await directory.ExistsAsync())
-        //        {
-        //            shareFileItem = directory.GetFilesAndDirectories(directoryName);
-        //        }
 
-        //    }
-
-        //    return msg;
         //}
     }
 }

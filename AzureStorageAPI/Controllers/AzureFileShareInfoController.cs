@@ -37,5 +37,13 @@ namespace AzureStorageAPI.Controllers
             return Ok(await _azureFileShare.DownloadFileAsync(directoryName, fileName, shareName));
 
         }
+
+        [HttpDelete]
+        [Route("DeleteFile")]
+        public async Task<IActionResult> DeleteFileAsync(string directoryName, string shareName, string fileName)
+        {
+            return Ok(await _azureFileShare.DeleteFileAsync(directoryName, fileName, shareName));
+
+        }
     }
 }
