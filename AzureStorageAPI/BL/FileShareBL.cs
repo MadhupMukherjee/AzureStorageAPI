@@ -175,10 +175,9 @@ namespace AzureStorageAPI.BL
                 throw new InvalidOperationException("No Share Client Found");
             }
         }
-        //public async Task<string> GetFileListsAsync(string directoryName)
-        //{
-        //    ShareClient share = new ShareClient(_configuration["StorageConnectionString"], shareName);
 
-        //}
+        
+
+
     }
 }
