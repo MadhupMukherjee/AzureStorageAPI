@@ -16,8 +16,6 @@ namespace AzureStorageAPI.Controllers
             _azureBlobService = azureBlobService ?? throw new ArgumentNullException(nameof(_azureBlobService));
         }
 
-
-
         [HttpPost]
         [Route("UploadBlob")]
         public async Task<IActionResult> UploadBlobAsync(string containerName, IFormFile files)
