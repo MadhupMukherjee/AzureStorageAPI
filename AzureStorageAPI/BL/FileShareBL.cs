@@ -31,13 +31,13 @@ namespace AzureStorageAPI.BL
                 {
                     // Get a reference to a file and upload it
                     ShareFileClient file = directory.GetFileClient(filename);
-                    if (await file.ExistsAsync())
-                    {
-                        file.Create(fileContent.Length);
-                        await file.UploadRangeAsync(
-                            new HttpRange(0, fileContent.Length),
-                            fileContent);
-                    }
+                    //if (await file.ExistsAsync())
+                    //{
+                    file.Create(fileContent.Length);
+                    await file.UploadRangeAsync(
+                        new HttpRange(0, fileContent.Length),
+                        fileContent);
+                    //}
                 }
                 else
                 {
@@ -66,7 +66,7 @@ namespace AzureStorageAPI.BL
                     ShareFileClient file = directory.GetFileClient(filename);
                     if (await file.ExistsAsync())
                     {
-                        
+
                         // Download the file
                         ShareFileDownloadInfo download = file.Download();
                         msg = "File Downloaded SuccessFully";
@@ -109,8 +109,8 @@ namespace AzureStorageAPI.BL
                     if (await file.ExistsAsync())
                     {
 
-                      await file.DeleteAsync();
-                      return "File Deleted successfully";
+                        await file.DeleteAsync();
+                        return "File Deleted successfully";
 
                     }
                     else
@@ -129,9 +129,5 @@ namespace AzureStorageAPI.BL
                 throw new InvalidOperationException("No Share Client Found");
             }
         }
-
-        
-
-
     }
 }
