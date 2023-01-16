@@ -3,6 +3,8 @@ using Azure.Data.Tables;
 
 namespace AzureStorageAPI.Model
 {
+
+
     public class Employee : ITableEntity
     {
         public Employee()
