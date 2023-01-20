@@ -31,7 +31,7 @@ namespace AzureStorageAPI.Controllers
         }
         [HttpGet]
         [Route("DownloadFile")]
-
+        
         public async Task<IActionResult> DownloadFileAsync(string directoryName, string shareName,string fileName)
         {
             return Ok(await _azureFileShare.DownloadFileAsync(directoryName, fileName, shareName));
@@ -44,6 +44,13 @@ namespace AzureStorageAPI.Controllers
         {
             return Ok(await _azureFileShare.DeleteFileAsync(directoryName, fileName, shareName));
 
+        }
+
+        [HttpGet]
+        [Route("GetAllShares")]
+        public async Task<IActionResult> GetAllSharesAsync()
+        {
+            return Ok(await _azureFileShare.GetAllSharesAsync());
         }
     }
 }

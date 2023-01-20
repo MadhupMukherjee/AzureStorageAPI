@@ -53,7 +53,7 @@ namespace AzureStorageAPI.BL
 
 
         }
-
+        
         public async Task<string> DownloadFileAsync(string directoryName, string filename, string shareName)
         {
             string msg = string.Empty;
@@ -129,5 +129,31 @@ namespace AzureStorageAPI.BL
                 throw new InvalidOperationException("No Share Client Found");
             }
         }
+
+        public async Task<List<string>> GetAllSharesAsync()
+        {
+            
+            ShareServiceClient shareServiceClient = new ShareServiceClient(_configuration["StorageConnectionString"]);
+
+
+            List<string> files = new List<string>();
+
+            await foreach (ShareItem shareItem in shareServiceClient.GetSharesAsync(ShareTraits.All,ShareStates.Snapshots))
+            {
+               
+                files.Add(shareItem.Name);
+            }
+
+            if (files.Count > 0)
+            {
+                return files;
+            }
+            else
+            {
+                throw new InvalidOperationException("No File Found");
+            }
+        }
+
+
     }
 }

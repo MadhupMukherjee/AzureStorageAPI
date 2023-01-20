@@ -7,5 +7,7 @@
         Task<string> DownloadFileAsync(string directoryName, string filename, string shareName);
 
         Task<string> DeleteFileAsync(string directoryName, string filename, string shareName);
+
+        Task<List<string>> GetAllSharesAsync();
     }
 }
