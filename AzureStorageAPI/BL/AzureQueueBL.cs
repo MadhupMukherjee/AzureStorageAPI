@@ -58,6 +58,8 @@ namespace AzureStorageAPI.BL
                         TimeSpan.FromSeconds(60.0)  // Make it invisible for another 60 seconds
                     );
 
+                returnmessage = "message Updated successfully";
+
             }
             else
             {
