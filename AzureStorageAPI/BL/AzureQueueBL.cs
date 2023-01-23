@@ -34,7 +34,6 @@ namespace AzureStorageAPI.BL
                 await queueClient.SendMessageAsync(queue.message);
 
                 returnmessage = "message Send successfully";
-
             }
             else
             {
