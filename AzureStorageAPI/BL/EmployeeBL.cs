@@ -6,7 +6,7 @@ namespace AzureStorageAPI.BL
 {
     public class EmployeeBL : IEmployeeService
     {
-        private const string tableName = "EmployeeInformation";
+        private const string tableName = "empinfo";
         private readonly IConfiguration _configuration;
         public EmployeeBL(IConfiguration configuration)
         {
