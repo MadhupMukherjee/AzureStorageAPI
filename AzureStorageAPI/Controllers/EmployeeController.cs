@@ -19,7 +19,6 @@ namespace AzureStorageAPI.Controllers
         public async Task<IActionResult> GetEmployee([FromQuery] string department, string id)
         {
             return Ok(await _employeeService.GetEmployeeAsync(department, id));
-
         }
         [HttpPost]
         [Route("AddEmployeeAsync")]
